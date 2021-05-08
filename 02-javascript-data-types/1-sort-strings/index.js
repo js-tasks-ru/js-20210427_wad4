@@ -5,5 +5,12 @@
  * @returns {string[]}
  */
 export function sortStrings(arr, param = 'asc') {
-
+  if (param !== 'asc' && param !== 'desc') {
+    throw new Error(`Некорректное значение параметра param: ${param}`);
+  }
+  const order = param === 'asc' ? 1 : -1;
+  const result = [...arr];
+  return result.sort(
+    (first, second) => first.localeCompare(second, ['ru', 'en'], {caseFirst: 'upper'}) * order
+  );
 }
